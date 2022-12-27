@@ -7,14 +7,12 @@ function rand(min, max) {
 
 function esperar(msg, tempo) {
     return new Promise((resolve, reject) => {
-
-        if (typeof msg !== 'string') {
-            reject('BAD VALUE');
-            return;
-        }
-
         setTimeout(() => {
-            resolve(msg);
+            if (typeof msg !== 'string') {
+                reject('BAD VALUE');
+                return;
+            }
+            resolve(msg.toUpperCase() + ' - Passei na promise');
             return;
         }, tempo);
     });
@@ -40,14 +38,14 @@ function esperar(msg, tempo) {
 //         console.log('Erro:', e)
 //     });
 
-// Promise.all Promise.race Promise.resolve Promise.reject
-const promises = [
-    esperar('Promise 1', rand(1, 5)),
-    esperar('Promise 2', rand(1, 5)),
-    esperar('Promise 3', rand(1, 5)),
-];
+// // Promise.all Promise.race Promise.resolve Promise.reject
+// const promises = [
+//     esperar('Promise 1', rand(1, 5)),
+//     esperar('Promise 2', rand(1, 5)),
+//     esperar('Promise 3', rand(1, 5)),
+// ];
 
-// primeira que resolver
+// // primeira que resolver
 // Promise.race(promises)
 //     .then(function (valor) {
 //         console.log(valor);
@@ -55,12 +53,3 @@ const promises = [
 //     .catch(function (erro) {
 //         console.log(erro);
 //     });
-
-// resolve tudo
-Promise.all(promises)
-    .then(function (valor) {
-        console.log(valor);
-    })
-    .catch(function (erro) {
-        console.log(erro);
-    });
