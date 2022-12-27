@@ -7,6 +7,9 @@ function rand(min, max) {
 
 function esperar(msg, tempo) {
     return new Promise((resolve, reject) => {
+
+        if (typeof msg !== 'string') reject('BAD VALUE');
+
         setTimeout(() => {
             resolve(msg);
         }, tempo);
@@ -21,7 +24,7 @@ esperar('Frase 1', rand(1, 3))
     })
     .then(resposta => {
         console.log(resposta);
-        return esperar('Frase 3', rand(1, 3));
+        return esperar(2222, rand(1, 3));
     })
     .then(resposta => {
         console.log(resposta);
@@ -29,4 +32,6 @@ esperar('Frase 1', rand(1, 3))
     .then(() => {
         console.log('Eu serei o último a ser exibido!');
     })
-    .catch(); 
+    .catch(e => {
+        console.log('Erro:', e)
+    }); 
